@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "SiftCalendar"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "dedbdc8a-d45a-5a45-9fb6-6d68a2d355f8"
+  }
+}

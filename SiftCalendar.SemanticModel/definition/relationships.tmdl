@@ -1,0 +1,17 @@
+relationship 039a85a0-dfc7-5dbe-ae90-ab16767f27b8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sales.'Order Date'
+	toColumn: Dates.Date
+
+relationship 3a5bc2aa-1956-59ce-b06c-bdb7c4e7ff22
+	fromColumn: Sales.Customer
+	toColumn: Customers.Customer
+
+relationship 89e88701-281c-5996-bfb5-852643a12741
+	fromColumn: Sales.Product
+	toColumn: Products.Product
+
+relationship d3af851a-467c-5440-beb5-f8a97541bcbc
+	fromColumn: Sales.Channel
+	toColumn: Channels.Channel
+

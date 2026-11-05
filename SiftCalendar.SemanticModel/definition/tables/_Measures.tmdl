@@ -1,0 +1,65 @@
+table _Measures
+	lineageTag: 7348dfe0-9814-551a-84fb-79ebc5a626c3
+
+	/// Total Revenue across selected calendar days.
+	measure 'Total Revenue' = SUM(Sales[Revenue])
+		formatString: \$#,0
+		lineageTag: 06134d50-3621-5878-8c83-1e646957a1a5
+
+	/// Number of orders in context.
+	measure 'Total Orders' = COUNTROWS(Sales)
+		formatString: #,0
+		lineageTag: 9382ac2e-4709-5767-82c5-eb9965fb50b9
+
+	/// Sales target in context.
+	measure 'Total Target' = SUM(Sales[Target])
+		formatString: \$#,0
+		lineageTag: 5bfaea8b-82fb-5d23-94eb-f3b7e9d14382
+
+	/// Sales budget in context.
+	measure 'Total Budget' = SUM(Sales[Budget])
+		formatString: \$#,0
+		lineageTag: 6e479025-abc7-5c43-99a0-dc4a0b554471
+
+	/// Target Attainment percentage.
+	measure 'Target Attainment %' = DIVIDE([Total Revenue], [Total Target])
+		formatString: 0.0%
+		lineageTag: 92a0e821-d34c-54f3-ab77-d073edb83228
+
+	/// Revenue for same period last year.
+	measure 'Revenue PY' = CALCULATE([Total Revenue], SAMEPERIODLASTYEAR(Dates[Date]))
+		formatString: \$#,0
+		lineageTag: 257fe9e0-4ead-5f5a-ba2d-f42dfd9035ce
+
+	/// Year-over-Year revenue growth %.
+	measure 'Revenue YoY %' = DIVIDE([Total Revenue] - [Revenue PY], [Revenue PY])
+		formatString: 0.0%
+		lineageTag: 04b7ed63-8861-55ec-96b6-bee6081b6cdd
+
+	/// Gross margin %.
+	measure 'Gross Margin %' = DIVIDE([Total Revenue] - SUM(Sales[Cost]), [Total Revenue])
+		formatString: 0.0%
+		lineageTag: 9a092b31-8b70-5c60-951d-1acb891b15e5
+
+	/// Growth indicator colour.
+	measure 'Growth Colour' = IF([Total Revenue] < [Revenue PY], "#EF4444", "#10B981")
+		lineageTag: 8722781a-0c27-594c-9475-eef66b3ab334
+
+	column Placeholder
+		dataType: string
+		lineageTag: 9d5e0f34-20a0-5d57-a77c-44deb4d69a6c
+		summarizeBy: none
+		sourceColumn: Placeholder
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = #table(type table [Placeholder = text], {"_"})
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

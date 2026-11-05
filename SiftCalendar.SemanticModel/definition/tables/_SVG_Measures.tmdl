@@ -1,0 +1,68 @@
+table _SVG_Measures
+	lineageTag: 1c1d842b-6681-5fd3-a42d-06fcb82f7da4
+
+	/// KPI card: Total Revenue with its change against last year.
+	measure P1_Revenue_KPI_SVG =
+			VAR _Txt = IF([Total Revenue] >= 1000000, "$" & FORMAT([Total Revenue] / 1000000, "0.0") & "M", FORMAT([Total Revenue], "$#,0"))
+			VAR _Sub = IF(ISBLANK([Revenue PY]) || [Revenue PY] = 0, "no prior year", IF([Total Revenue] >= [Revenue PY], "▲ ", "▼ ") & SUBSTITUTE(FORMAT(ABS(DIVIDE([Total Revenue] - [Revenue PY], [Revenue PY])), "0.0%"), "%", "%25") & " vs PY")
+			VAR _Col = IF(ISBLANK([Revenue PY]) || [Revenue PY] = 0, "rgb(100,116,139)", IF([Total Revenue] >= [Revenue PY], "rgb(16,185,129)", "rgb(239,68,68)"))
+			RETURN "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='130' height='56' viewBox='0 0 130 56'>" &
+			    "<rect width='130' height='56' fill='transparent'/>" &
+			    "<text x='0' y='26' font-family='Segoe UI,sans-serif' font-size='24' font-weight='700' fill='rgb(15,26,20)'>" & _Txt & "</text>" &
+			    "<text x='0' y='48' font-family='Segoe UI,sans-serif' font-size='11.5' font-weight='600' fill='" & _Col & "'>" & _Sub & "</text>" &
+			    "</svg>"
+		lineageTag: 436d3938-cbb9-5e7e-84cc-c90a9a52aa19
+
+	/// KPI card: Total Orders with its change against last year.
+	measure P1_Orders_KPI_SVG =
+			VAR _Txt = FORMAT([Total Orders], "#,0")
+			VAR _Sub = IF(ISBLANK(CALCULATE([Total Orders], SAMEPERIODLASTYEAR(Dates[Date]))) || CALCULATE([Total Orders], SAMEPERIODLASTYEAR(Dates[Date])) = 0, "no prior year", IF([Total Orders] >= CALCULATE([Total Orders], SAMEPERIODLASTYEAR(Dates[Date])), "▲ ", "▼ ") & SUBSTITUTE(FORMAT(ABS(DIVIDE([Total Orders] - CALCULATE([Total Orders], SAMEPERIODLASTYEAR(Dates[Date])), CALCULATE([Total Orders], SAMEPERIODLASTYEAR(Dates[Date])))), "0.0%"), "%", "%25") & " vs PY")
+			VAR _Col = IF(ISBLANK(CALCULATE([Total Orders], SAMEPERIODLASTYEAR(Dates[Date]))) || CALCULATE([Total Orders], SAMEPERIODLASTYEAR(Dates[Date])) = 0, "rgb(100,116,139)", IF([Total Orders] >= CALCULATE([Total Orders], SAMEPERIODLASTYEAR(Dates[Date])), "rgb(16,185,129)", "rgb(239,68,68)"))
+			RETURN "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='130' height='56' viewBox='0 0 130 56'>" &
+			    "<rect width='130' height='56' fill='transparent'/>" &
+			    "<text x='0' y='26' font-family='Segoe UI,sans-serif' font-size='24' font-weight='700' fill='rgb(15,26,20)'>" & _Txt & "</text>" &
+			    "<text x='0' y='48' font-family='Segoe UI,sans-serif' font-size='11.5' font-weight='600' fill='" & _Col & "'>" & _Sub & "</text>" &
+			    "</svg>"
+		lineageTag: 030f7414-f463-53f3-ae1c-aec9efafd91a
+
+	/// KPI card: Target Attainment % with target value.
+	measure P1_Attainment_KPI_SVG =
+			VAR _Pct = [Target Attainment %]
+			VAR _Txt = SUBSTITUTE(FORMAT(_Pct, "0.0%"), "%", "%25")
+			VAR _Sub = "target: " & IF([Total Target] >= 1000000, "$" & FORMAT([Total Target] / 1000000, "0.0") & "M", FORMAT([Total Target], "$#,0"))
+			VAR _Col = IF(ISBLANK(_Pct), "rgb(100,116,139)", IF(_Pct >= 1.0, "rgb(16,185,129)", "rgb(239,68,68)"))
+			RETURN "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='130' height='56' viewBox='0 0 130 56'>" &
+			    "<rect width='130' height='56' fill='transparent'/>" &
+			    "<text x='0' y='26' font-family='Segoe UI,sans-serif' font-size='24' font-weight='700' fill='rgb(15,26,20)'>" & _Txt & "</text>" &
+			    "<text x='0' y='48' font-family='Segoe UI,sans-serif' font-size='11.5' font-weight='600' fill='" & _Col & "'>" & _Sub & "</text>" &
+			    "</svg>"
+		lineageTag: 09bc2dd6-f695-5f13-99b3-a6f2be246396
+
+	/// KPI card: Budget Variance.
+	measure P1_Budget_KPI_SVG =
+			VAR _Txt = IF([Total Budget] >= 1000000, "$" & FORMAT([Total Budget] / 1000000, "0.0") & "M", FORMAT([Total Budget], "$#,0"))
+			VAR _Diff = [Total Revenue] - [Total Budget]
+			VAR _Sub = IF(ISBLANK([Total Budget]) || [Total Budget] = 0, "no budget", IF(_Diff >= 0, "+", "-") & IF(ABS(_Diff) >= 1000000, "$" & FORMAT(ABS(_Diff) / 1000000, "0.0") & "M", FORMAT(ABS(_Diff), "$#,0")) & " vs bud")
+			VAR _Col = IF(ISBLANK([Total Budget]) || [Total Budget] = 0, "rgb(100,116,139)", IF(_Diff >= 0, "rgb(16,185,129)", "rgb(239,68,68)"))
+			RETURN "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='130' height='56' viewBox='0 0 130 56'>" &
+			    "<rect width='130' height='56' fill='transparent'/>" &
+			    "<text x='0' y='26' font-family='Segoe UI,sans-serif' font-size='24' font-weight='700' fill='rgb(15,26,20)'>" & _Txt & "</text>" &
+			    "<text x='0' y='48' font-family='Segoe UI,sans-serif' font-size='11.5' font-weight='600' fill='" & _Col & "'>" & _Sub & "</text>" &
+			    "</svg>"
+		lineageTag: 27fc7497-ec4a-5764-b186-9da54459ffd8
+
+	column Placeholder
+		dataType: string
+		isHidden
+		lineageTag: f4e9e25b-afa7-564e-afdf-b83c3da6a590
+		summarizeBy: none
+		sourceColumn: [Placeholder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _SVG_Measures = calculated
+		mode: import
+		source = ROW("Placeholder", BLANK())
+
+	annotation PBI_Id = c09388126bad588680dbedbdadfbdb7e
+

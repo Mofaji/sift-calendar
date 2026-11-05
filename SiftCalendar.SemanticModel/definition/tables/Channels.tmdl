@@ -1,0 +1,30 @@
+table Channels
+	lineageTag: d2e85132-e278-5715-afd6-32af9867996b
+
+	column Channel
+		dataType: string
+		isKey
+		lineageTag: 90866f70-b937-5aee-846d-5fdc75a62f80
+		summarizeBy: none
+		sourceColumn: Channel
+
+		annotation SummarizationSetBy = User
+
+	partition Channels = m
+		mode: import
+		source =
+				let
+				    Source = #table(
+				        type table [Channel = text],
+				        {
+				            {"Direct Sales"},
+				            {"Marketplace"},
+				            {"Online Web"},
+				            {"Partner Referral"}
+				        }
+				    )
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,46 @@
+table Customers
+	lineageTag: 605e246e-7058-59f4-8200-a58b6a2ee654
+
+	column Customer
+		dataType: string
+		isKey
+		lineageTag: 5b5fb43c-f769-50fd-aa91-5310d5b6d648
+		summarizeBy: none
+		sourceColumn: Customer
+
+		annotation SummarizationSetBy = User
+
+	column Segment
+		dataType: string
+		lineageTag: 7bf82ed4-8232-5851-9852-44e1ca751eef
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = User
+
+	partition Customers = m
+		mode: import
+		source =
+				let
+				    Source = #table(
+				        type table [Customer = text, Segment = text],
+				        {
+				            {"Bluefin Corp", "Enterprise"},
+				            {"Apex Financial", "Enterprise"},
+				            {"Atlas Logistics", "Mid-Market"},
+				            {"Quarry Robotics", "Enterprise"},
+				            {"Evergreen Foods", "Mid-Market"},
+				            {"Larkspur Corp", "Enterprise"},
+				            {"Cobalt Cloud", "Enterprise"},
+				            {"Ostrava Systems", "SMB"},
+				            {"Meridian Dynamics", "Enterprise"},
+				            {"Harbor Lane Traders", "SMB"},
+				            {"Vertex Pharma", "Enterprise"},
+				            {"Zenith Motors", "Enterprise"}
+				        }
+				    )
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

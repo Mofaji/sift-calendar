@@ -1,0 +1,39 @@
+table Products
+	lineageTag: bf7fdf3c-8901-51b3-a550-25b4ba3b3a86
+
+	column Product
+		dataType: string
+		isKey
+		lineageTag: 664515c4-b3d5-5352-9f27-537afec9e903
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = User
+
+	column Category
+		dataType: string
+		lineageTag: 4739ad39-1ccb-5ae0-95b9-9ee958ea05ee
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = User
+
+	partition Products = m
+		mode: import
+		source =
+				let
+				    Source = #table(
+				        type table [Product = text, Category = text],
+				        {
+				            {"API Gateway", "SaaS Platform"},
+				            {"Analytics Suite", "Security & Cloud"},
+				            {"Cloud Storage", "Security & Cloud"},
+				            {"Platform License", "SaaS Platform"},
+				            {"Security Shield", "Security & Cloud"}
+				        }
+				    )
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

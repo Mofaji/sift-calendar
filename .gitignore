@@ -1,0 +1,24 @@
+# Whitelist: only the published release set is tracked.
+# Visual source, build tooling, scripts, test screenshots and data generators stay local.
+/*
+!/.gitignore
+!/README.md
+!/LICENSE
+!/THIRD_PARTY_NOTICES.md
+!/SECURITY.md
+!/SiftCalendar.pbip
+!/SiftCalendar.Report/
+!/SiftCalendar.SemanticModel/
+!/release/
+!/docs/
+
+# Power BI Desktop per-user state and data cache - never publish
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/editorSettings.json
+
+# Safety nets
+.env
+.env.*
+*.log
+*.tmp

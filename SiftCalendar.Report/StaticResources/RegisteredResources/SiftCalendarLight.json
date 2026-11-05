@@ -1,0 +1,50 @@
+{
+  "name": "SiftCalendarLight.json",
+  "dataColors": [
+    "#10B981",
+    "#047857",
+    "#0284C7",
+    "#F59E0B",
+    "#8B5CF6",
+    "#EC4899",
+    "#3B82F6",
+    "#64748B"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#0F1A14",
+  "tableAccent": "#10B981",
+  "maximum": "#10B981",
+  "minimum": "#EF4444",
+  "null": "#6F7E76",
+  "textClasses": {
+    "label": {
+      "color": "#45574D",
+      "fontSize": 9,
+      "fontFace": "Segoe UI"
+    },
+    "callout": {
+      "color": "#0F1A14",
+      "fontSize": 24,
+      "fontFace": "Segoe UI",
+      "fontWeight": "bold"
+    },
+    "title": {
+      "color": "#0F1A14",
+      "fontSize": 12,
+      "fontFace": "Segoe UI",
+      "fontWeight": "bold"
+    },
+    "header": {
+      "color": "#0F1A14",
+      "fontSize": 11,
+      "fontFace": "Segoe UI",
+      "fontWeight": "semibold"
+    },
+    "largeTitle": {
+      "color": "#0F1A14",
+      "fontSize": 16,
+      "fontFace": "Segoe UI",
+      "fontWeight": "bold"
+    }
+  }
+}

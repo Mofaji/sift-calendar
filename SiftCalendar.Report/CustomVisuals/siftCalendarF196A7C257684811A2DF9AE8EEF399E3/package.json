@@ -1,5 +1,5 @@
 {
-		"version": "1.0.0.11",
+		"version": "1.0.0.12",
 		"author": {"name":"faizaan.me","email":"contact@faizaan.me"},
 		"resources": [
 			{
@@ -8,7 +8,7 @@
 				"file": "resources/siftCalendarF196A7C257684811A2DF9AE8EEF399E3.pbiviz.json"
 			}
 		],
-		"visual": {"name":"siftCalendar","displayName":"Sift Calendar","guid":"siftCalendarF196A7C257684811A2DF9AE8EEF399E3","visualClassName":"Visual","version":"1.0.0.11","description":"Calendar Heatmap visual with 8 layouts, 6 colour modes, date range dragging, presets, drilldown, themes, contrast snapping, and plain-English insights.","supportUrl":"https://faizaan.me","gitHubUrl":"https://github.com/Mofaji/sift-calendar"},
+		"visual": {"name":"siftCalendar","displayName":"Sift Calendar","guid":"siftCalendarF196A7C257684811A2DF9AE8EEF399E3","visualClassName":"Visual","version":"1.0.0.12","description":"Calendar Heatmap visual with 8 layouts, 6 colour modes, date range dragging, presets, drilldown, themes, contrast snapping, and plain-English insights.","supportUrl":"https://faizaan.me","gitHubUrl":"https://github.com/Mofaji/sift-calendar"},
 		"metadata": {
 			"pbivizjson": {
 				"resourceId": "rId0"
